@@ -13,30 +13,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth');
-Route::get('/profile',function(){
-    return view('profile');
-})->middleware('auth');
-Route::get('/myfile',function(){
-    return view('myfile');
-})->middleware('auth');
-Route::get('/recent',function(){
-    return view('recent');
-})->middleware('auth');
-Route::get('/photos',function (){
-    return view('photos')->middleware('auth');
-})->middleware('auth');
-Route::get('/recycle',function (){
-    return view('recycle');
-})->middleware('auth');
-Route::get('/setting',function (){
-    return view('setting');
-})->middleware('auth');
-Route::get('login',function (){
-    return view('auth.login');
-})->middleware('auth');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return view('home');
+    });
+
+    Route::get('/profile', function () {
+        return view('profile');
+    });
+    Route::get('/myfile', function () {
+        return view('myfile');
+    });
+    Route::get('/recent', function () {
+        return view('recent');
+    });
+    Route::get('/photos', function () {
+        return view('photos');
+    });
+    Route::get('/recycle', function () {
+        return view('recycle');
+    });
+    Route::get('/setting', function () {
+        return view('setting');
+    });
+});
 
 Auth::routes();
 
